@@ -15,8 +15,7 @@ SortedListPtr SLCreate(CompareFuncT cf)
 /*    newPtr->SortedListIteratorPtr = NULL;*/
 
 	printf("Finished making the sorted list.\n");
- 
-	return newPtr;
+ 	return newPtr;
 }
         
     
@@ -85,11 +84,11 @@ int SLInsert(SortedListPtr list, void *newObj, char*key)
 
 		NodePtr cur = list->head;
 		NodePtr prev = NULL;
-        int comp = (int)strcmp(cur->name, key);
+        int comp = strcmp(cur->name, key);
         while (cur->next!=NULL && comp!=0) {
             prev = cur;
             cur = cur->next;
-            comp = (int)strcmp(cur->name, key);
+            comp = (int)strcmp(cur->name, (char*)newObj);
         }
 		
         
@@ -121,7 +120,7 @@ int Insert(SortedListPtr list, void *newObj, char*key){
                 list->head = newNode;
                 
                 
-                printf("Leaving SLInsert\n");
+                printf("Leaving Insert\n");
                 
                 
                 return 1;
@@ -152,7 +151,7 @@ int Insert(SortedListPtr list, void *newObj, char*key){
                     
                     list->head = newNode;
                     newNode->refcount += 1;
-                    printf("Leaving SLInsert\n");
+                    printf("Leaving Insert\n");
                     
                     
                     
@@ -183,7 +182,7 @@ int Insert(SortedListPtr list, void *newObj, char*key){
                     
                     newNode->next = cur;
                     
-                    printf("Leaving SLInsert\n");
+                    printf("Leaving Insert\n");
                     
                     return 1;
                 }

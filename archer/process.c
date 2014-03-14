@@ -65,7 +65,7 @@ void process(char *myToken, char *myFilePath) //Change the parameters to (char *
         printf("Key is: %s, path is: %s , lenth:%d \n", trok, buffer, strlen(buffer));
         insert(him);
         Insert(rust, him->key, him->key);
-        
+       printf("Tok insert was a sucess homie: %s\n", him->key); 
         //free(him);
         //him = (NNodePtr)malloc(sizeof(NNode));
         //  printAll();
@@ -87,7 +87,7 @@ void insert(NNodePtr item){
     HashBucket * current_token;
     char * KEY = item->key;
     HASH_FIND_STR(tokens, KEY , current_token);
-    
+   
     
     if(current_token==NULL){
         current_token = (HashBucket*)malloc(sizeof(HashBucket));
@@ -107,7 +107,8 @@ void insert(NNodePtr item){
         //        free(item);
     }
     else{
-        SortedListPtr temp = current_token->list;
+	   
+     SortedListPtr temp = current_token->list;
         int success = 0;
         int * one = malloc(sizeof(int));
         *one  = 1;
@@ -129,7 +130,7 @@ int printAll(char * path){
     NodePtr temp = rust->head;
     NodePtr pr;
     printf("entered printall\n");
-    FILE * f = fopen(path, "w");
+  //  FILE * f = fopen(path, "w");
     while(temp!=NULL){
         
         HashBucket * current_token;
@@ -146,24 +147,24 @@ int printAll(char * path){
             SortedListPtr buff = current_token->list;
             NodePtr ptr = buff->head;
             NodePtr prev; NodePtr tomp;
-            fprintf(f, "<List> (%s)\n </List>",KEY);
+            printf( "<List> (%s)\n </List>",KEY);
             
             while(ptr!=NULL){
                 
                 char * filename = ptr->name;
                 int jer = *(int*)ptr->data;
-                fprintf(f,"(%s ,%d)", filename, jer);
+                printf("(%s ,%d)", filename, jer);
                 prev = ptr;
                 ptr = ptr->next;
                 
                 if(ptr!=NULL){
-                    fprintf(f,"-> ");}
+                    printf("-> ");}
                 
                 
             }
             free(prev->data); free(prev->name); free(prev->next);
             free(prev);
-            fprintf(f, "\n");
+            printf("\n");
             free(current_token->list);
             pr = temp;
             if(temp->next==NULL){
@@ -182,7 +183,7 @@ int printAll(char * path){
             continue;}
         
     }
-    fclose(f);
+    
     free(rust);
     free(tokens);
     
