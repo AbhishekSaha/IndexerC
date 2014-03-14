@@ -62,7 +62,7 @@ void process(char *myToken, char *myFilePath) //Change the parameters to (char *
         char * copytwo = malloc(strlen(buffer) +1);
         strcpy(copytwo, buffer);
         him->key = copyone; him->filename = copytwo;
-        printf("Key is: %s, path is: %s , lenth:%d \n", trok, buffer);
+        printf("Key is: %s, path is: %s , lenth:%d \n", trok, buffer, strlen(buffer));
         insert(him);
         Insert(rust, him->key, him->key);
         
