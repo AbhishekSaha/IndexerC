@@ -129,7 +129,7 @@ int printAll(char * path){
     
     NodePtr temp = rust->head;
     NodePtr pr;
-    printf("entered printall\n");
+    FILE * f = fopen(path, "w");
   //  FILE * f = fopen(path, "w");
     while(temp!=NULL){
         
@@ -147,24 +147,24 @@ int printAll(char * path){
             SortedListPtr buff = current_token->list;
             NodePtr ptr = buff->head;
             NodePtr prev; NodePtr tomp;
-            printf( "<List> (%s)\n </List>",KEY);
+            fprintf(f, "<List> (%s)\n </List>",KEY);
             
             while(ptr!=NULL){
                 
                 char * filename = ptr->name;
                 int jer = *(int*)ptr->data;
-                printf("(%s ,%d)", filename, jer);
+                fprintf(f,"(%s ,%d)", filename, jer);
                 prev = ptr;
                 ptr = ptr->next;
                 
                 if(ptr!=NULL){
-                    printf("-> ");}
+                    fprintf(f,"-> ");}
                 
                 
             }
             free(prev->data); free(prev->name); free(prev->next);
             free(prev);
-            printf("\n");
+            fprintf(f,"\n\n");
             free(current_token->list);
             pr = temp;
             if(temp->next==NULL){
@@ -183,10 +183,11 @@ int printAll(char * path){
             continue;}
         
     }
-    
+   
+	
     free(rust);
     free(tokens);
-    
+    fclose(f);
     
     return 1;
 }

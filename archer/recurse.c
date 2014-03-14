@@ -106,6 +106,8 @@ int main(int argc, char **argv)
     fclose(bufferPtr);
 	process("bill", "rondo");
     printAll(indexFile);
+printf("print da bemat\n");
+return 0;
 }
 
 
