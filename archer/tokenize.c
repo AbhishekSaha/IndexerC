@@ -31,6 +31,23 @@ char * convertCharToHex(char str) {
         return hex;
 }
 
+int isEmpty(char *myFile)
+{
+	long size;
+
+	FILE *ptr = fopen(myFile,"rb");
+	
+	fseek(myFile,0,SEEK_END);
+	size = ftell(myFile);
+	fclose(myFile);
+	
+	if(size != 0)
+		return 0;
+	else if(size == 0)
+		return 1;
+}
+	
+
 /*This function shifts the characters in a string to the left by an amount shamt */
 char *genShift(char *str, int shamt)
 {
@@ -156,6 +173,10 @@ void processFile(char *path, FILE *bufferPtr)
 {
 	FILE *myFile;
 	myFile = fopen(path,"r");
+
+	if(isEmpty(path) == 1)
+		return;
+	
 
 	// Got the number of characters in the file
 	int charCount;

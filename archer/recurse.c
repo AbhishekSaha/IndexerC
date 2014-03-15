@@ -80,12 +80,43 @@ void recurse(char *path, FILE *bufferPtr)
 	return;
 }
 
+int checkFile(char *file)
+{
+        char temp[25];
+        strcpy(temp,file);
+
+        printf("File is: %s\n",temp);
+
+        char bob[4];
+
+        int length = strlen(temp);
+
+        printf("Length is: %d\n",length);
+
+
+        bob[3] = temp[length];
+        bob[2] = temp[length -1];
+        bob[1] = temp[length - 2];
+        bob[0] = temp[length - 3];
+
+        printf("temp is: %s\n",bob);
+
+        return strcmp(bob,"txt");
+}
+
+
 int main(int argc, char **argv)
 {
 	char *indexFile;
 	indexFile = argv[1];
     
 	FILE *bufferPtr = fopen("aux.txt","w");
+	
+	if(checkFile(indexFile) != 0)
+	{
+		printf("Not a valid file name. Please enter a file with a .txt extension\n");
+		return 0;
+	}
     
 	DIR *dirPtr;
 	dirPtr = opendir(argv[2]);
@@ -106,6 +137,8 @@ int main(int argc, char **argv)
     fclose(bufferPtr);
 	process("bill", "rondo");
     printAll(indexFile);
+	
+	remove("aux.txt");
 printf("print da bemat\n");
 return 0;
 }
