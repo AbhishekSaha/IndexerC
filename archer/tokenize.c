@@ -31,23 +31,6 @@ char * convertCharToHex(char str) {
         return hex;
 }
 
-int isEmpty(char *myFile)
-{
-	long size;
-
-	FILE *ptr = fopen(myFile,"rb");
-	
-	fseek(myFile,0,SEEK_END);
-	size = ftell(myFile);
-	fclose(myFile);
-	
-	if(size != 0)
-		return 0;
-	else if(size == 0)
-		return 1;
-}
-	
-
 /*This function shifts the characters in a string to the left by an amount shamt */
 char *genShift(char *str, int shamt)
 {
@@ -70,10 +53,15 @@ char *createNewToken(char *str,char *token)
 
 	if(!isalnum(str[i]))
 	{
-		while(!isalnum(str[i]))
+		while(!isalnum(str[i]) )
 		{
-			test = convertCharToHex(str[i]);	
-			str = genShift(str,1);
+			if(str[i] != '\'')
+			{
+				test = convertCharToHex(str[i]);	
+				str = genShift(str,1);
+			}
+			else if(str[i] == '\'')
+				i++;	
 		}
 	}
 	
@@ -85,6 +73,24 @@ char *createNewToken(char *str,char *token)
 
 	token[i] = '\0';
 	return str;
+}
+
+int tokensExist(FILE *myFile)
+{
+	char c;
+	int flag;
+	flag = 0;
+
+	while((c = getc(myFile)) != EOF)
+	{
+		if(isalnum(c))
+			flag = 1;
+	}
+
+	if(flag == 1)
+		return 1;
+	else if(flag == 0)
+		return 0;
 }
 /*This function returns the total number of characters in the file*/
 int getCharCount(FILE *myFile)
@@ -169,6 +175,25 @@ char *shiftStr(char *str, char *token)
 		3) Shift the file string to the left in order to get the next string
 
 */
+
+int isEmpty(char *myFile)
+{
+	long size;
+
+	FILE *ptr = fopen(myFile,"rb");
+	
+	fseek(ptr,0,SEEK_END);
+	size = ftell(ptr);
+	fclose(ptr);
+	
+	if(size != 0)
+		return 0;
+	else if(size == 0)
+		return 1;
+	
+}
+
+
 void processFile(char *path, FILE *bufferPtr)
 {
 	FILE *myFile;
@@ -176,7 +201,9 @@ void processFile(char *path, FILE *bufferPtr)
 
 	if(isEmpty(path) == 1)
 		return;
-	
+
+	if(tokensExist(myFile) == 0)
+		return;	
 
 	// Got the number of characters in the file
 	int charCount;
