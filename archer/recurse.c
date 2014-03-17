@@ -141,8 +141,32 @@ int main(int argc, char **argv)
 	
 	if(holder == 1)
 	{
-		printf("overwriting file with same name as %s...\n",argv[1]);
-		remove(argv[1]);
+		char decision;
+		printf("Would you like to override the existing file (y/n)? \n");
+		scanf("%c",&decision);
+
+		while((decision != 'y') && (decision != 'n'))
+		{
+			if(decision == 'y')
+			{		
+				printf("Overwriting file with same name as %s...\n",argv[1]);
+				remove(argv[1]);
+
+			}
+			else if(decision == 'n')
+			{
+				printf("Existing file not overridden. Exiting program...\n");
+				return 0;
+			}
+			else
+			{
+				printf("nope\n");
+				printf("Invalid choice. Would you like to override the existing file (y/n)? \n");
+				scanf("%c",&decision);
+			}
+		}
+		
+		
 	}
 
 
