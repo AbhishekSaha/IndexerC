@@ -65,17 +65,17 @@ void process(char *myToken, char *myFilePath) //Change the parameters to (char *
         
         insert(him);
         Insert(rust, him->key, him->key);
-       
+        
         //free(him);
         //him = (NNodePtr)malloc(sizeof(NNode));
         //  printAll();
         
-    }6
+    }
     
     
-  
+    
     fclose(f);
-
+    
     
     // printAll();
     
@@ -87,7 +87,7 @@ void insert(NNodePtr item){
     HashBucket * current_token;
     char * KEY = item->key;
     HASH_FIND_STR(tokens, KEY , current_token);
-   
+    
     
     if(current_token==NULL){
         current_token = (HashBucket*)malloc(sizeof(HashBucket));
@@ -107,8 +107,8 @@ void insert(NNodePtr item){
         //        free(item);
     }
     else{
-	   
-     SortedListPtr temp = current_token->list;
+        
+        SortedListPtr temp = current_token->list;
         int success = 0;
         int * one = malloc(sizeof(int));
         *one  = 1;
@@ -130,7 +130,7 @@ int printAll(char * path){
     NodePtr temp = rust->head;
     NodePtr pr;
     FILE * f = fopen(path, "w");
-  //  FILE * f = fopen(path, "w");
+    //  FILE * f = fopen(path, "w");
     while(temp!=NULL){
         
         HashBucket * current_token;
@@ -172,24 +172,24 @@ int printAll(char * path){
             }
             temp = temp->next;
             
-/*	while(strcmp(pr->name, temp->name)==0){
-                temp = temp->next;
+            if(temp!=NULL){
+                while(strcmp(pr->name, temp->name)==0){
+                    temp = temp->next;
+                    if (temp==NULL) {
+                        break;
+                    }
+                }
+                
             }
-*/
-            /*while (strcmp(temp->name, pr->name)!=0) {
-                tomp = temp;
-                temp = temp->next;
-               free(tomp);
-            }*/
-     
-            continue;}
-        
-    }
-   
-	
-    free(rust);
-    free(tokens);
-    fclose(f);
-    
-    return 1;
-}
+            
+                    continue;}
+                
+            }
+            
+            
+            free(rust);
+            free(tokens);
+            fclose(f);
+            
+            return 1;
+        }
