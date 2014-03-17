@@ -42,7 +42,7 @@ void process(char *myToken, char *myFilePath) //Change the parameters to (char *
 {
     
     
-    printf("entered process\n");
+    
     rust = SLCreate(compareStrings);
     
     
@@ -62,10 +62,10 @@ void process(char *myToken, char *myFilePath) //Change the parameters to (char *
         char * copytwo = malloc(strlen(buffer) +1);
         strcpy(copytwo, buffer);
         him->key = copyone; him->filename = copytwo;
-        printf("Key is: %s, path is: %s , lenth:%d \n", trok, buffer, strlen(buffer));
+        
         insert(him);
         Insert(rust, him->key, him->key);
-       printf("Tok insert was a sucess homie: %s\n", him->key); 
+       
         //free(him);
         //him = (NNodePtr)malloc(sizeof(NNode));
         //  printAll();
@@ -103,7 +103,7 @@ void insert(NNodePtr item){
         success = SLInsert(temp, (void*)one, item->filename);
         current_token->list = temp;
         HASH_ADD_STR(tokens, name, current_token);
-        printf("%s Success!\n", temp->head->name);
+        
         //        free(item);
     }
     else{
@@ -171,9 +171,11 @@ int printAll(char * path){
                 break;
             }
             temp = temp->next;
-            while(strcmp(pr->name, temp->name)==0){
+            
+/*	while(strcmp(pr->name, temp->name)==0){
                 temp = temp->next;
             }
+*/
             /*while (strcmp(temp->name, pr->name)!=0) {
                 tomp = temp;
                 temp = temp->next;

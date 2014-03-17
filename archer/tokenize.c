@@ -202,9 +202,9 @@ void processFile(char *path, FILE *bufferPtr)
 	if(isEmpty(path) == 1)
 		return;
 
-	if(tokensExist(myFile) == 0)
+/*	if(tokensExist(myFile) == 0)
 		return;	
-
+*/
 	// Got the number of characters in the file
 	int charCount;
 	charCount = getCharCount(myFile);	
@@ -220,7 +220,7 @@ void processFile(char *path, FILE *bufferPtr)
 		even if it doesn't get returned */
 		strPtr = createNewToken(str,token); // returns reference to the modified file string
 		strPtr = shiftStr(strPtr,token); // also returns reference to the modified file string
-		printf("Token is: %s\n",token);	
+		
 		fprintf(bufferPtr,path);
 		fprintf(bufferPtr," ");
 		fprintf(bufferPtr,token);

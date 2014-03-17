@@ -1,8 +1,8 @@
 main: recurse.c process.c process.h sl.h sorted-list.c sorted-list.h uthash.h
 	clear
-	gcc -o main recurse.c process.c process.h sl.h sorted-list.c sorted-list.h uthash.h
-	./main index.txt sample
-	rm main
+	gcc -o index recurse.c process.c process.h sl.h sorted-list.c sorted-list.h uthash.h
+	
+
 
 debug: recurse.c process.c process.h sl.h sorted-list.c sorted-list.h uthash.h
 	clear

@@ -14,7 +14,7 @@ SortedListPtr SLCreate(CompareFuncT cf)
    
 /*    newPtr->SortedListIteratorPtr = NULL;*/
 
-	printf("Finished making the sorted list.\n");
+	
  	return newPtr;
 }
         
@@ -33,7 +33,7 @@ void SLDestroy(SortedListPtr list)
  
     free(list);
 
-	printf("Destroying myList\n");
+	
     return;
 }
 
@@ -47,7 +47,7 @@ NodePtr NodeCreate(void *newObj, char*name)
 	newPtr->next = NULL;
 	newPtr->refcount = 0;
 
-	printf("Finished making the node.\n");
+	
 
 	return newPtr;
 }
@@ -55,7 +55,7 @@ NodePtr NodeCreate(void *newObj, char*name)
 void NodeDestroy(NodePtr myNode)
 {
 	free(myNode);
-	printf("Destroying myNode\n");
+	
 
 	return;
 }
@@ -73,7 +73,7 @@ int SLInsert(SortedListPtr list, void *newObj, char*key)
 		NodePtr newNode = NodeCreate(newObj, key);
 		list->head = newNode;
 		list->head->refcount += 1;
-		printf("Leaving SLInsert Data is: %d\n", *((int*)list->head->data));
+		
 			
 
 		return 1;
@@ -95,7 +95,7 @@ int SLInsert(SortedListPtr list, void *newObj, char*key)
         if (comp==0) {
            
             *((int*)cur->data) = *((int*)cur->data) + 1;
-            printf("%d\n", *(int*)cur->data);
+            
            
            SLRemove(list, key);
            Insert(list, cur->data , key);
@@ -120,7 +120,7 @@ int Insert(SortedListPtr list, void *newObj, char*key){
                 list->head = newNode;
                 
                 
-                printf("Leaving Insert\n");
+                
                 
                 
                 return 1;
@@ -151,7 +151,7 @@ int Insert(SortedListPtr list, void *newObj, char*key){
                     
                     list->head = newNode;
                     newNode->refcount += 1;
-                    printf("Leaving Insert\n");
+                    
                     
                     
                     
@@ -164,7 +164,7 @@ int Insert(SortedListPtr list, void *newObj, char*key){
                     {
                         if(newObj == cur->data)
                         {
-                            printf("Duplicates are not stored in this list\n");
+                            
                             return 1;
                         }
                         prev = cur;
@@ -182,7 +182,7 @@ int Insert(SortedListPtr list, void *newObj, char*key){
                     
                     newNode->next = cur;
                     
-                    printf("Leaving Insert\n");
+                    
                     
                     return 1;
                 }
@@ -198,7 +198,7 @@ int StringInsert(SortedListPtr list, void *newObj, char*key){
         list->head = newNode;
         
         
-        printf("Leaving SLInsert\n");
+        
         
         
         return 1;
@@ -229,7 +229,7 @@ int StringInsert(SortedListPtr list, void *newObj, char*key){
             
             list->head = newNode;
             newNode->refcount += 1;
-            printf("Leaving SLInsert\n");
+            
             
             
             
@@ -242,7 +242,7 @@ int StringInsert(SortedListPtr list, void *newObj, char*key){
             {
                 if(newObj == cur->data)
                 {
-                    printf("Duplicates are not stored in this list\n");
+                    
                     return 1;
                 }
                 prev = cur;
@@ -260,7 +260,7 @@ int StringInsert(SortedListPtr list, void *newObj, char*key){
             
             newNode->next = cur;
             
-            printf("Leaving SLInsert\n");
+            
             
             return 1;
         }
@@ -274,11 +274,11 @@ int StringInsert(SortedListPtr list, void *newObj, char*key){
 
 int SLRemove(SortedListPtr list, char * key)
 {
-	printf("Entering SLRemove\n");
+	
 
 	if(list->head==NULL)
 	{
-		printf("Leaving SLRemove\n");
+		
 		return 0; // remove failed
 	}
 	else
@@ -310,7 +310,7 @@ int SLRemove(SortedListPtr list, char * key)
 
 SortedListIteratorPtr SLCreateIterator(SortedListPtr list)
 {
-	printf("Enter SLCreateIterator\n");
+	
 
 	SortedListIteratorPtr  init = (SortedListIteratorPtr) malloc(sizeof(SortedListIterator));
 
@@ -319,7 +319,7 @@ SortedListIteratorPtr SLCreateIterator(SortedListPtr list)
 	if(init->current != NULL)
 		init->current->refcount += 1;
 
-	printf("Leaving SLCreateIterator\n");
+	
 	
 	return init;
 }
@@ -327,11 +327,11 @@ SortedListIteratorPtr SLCreateIterator(SortedListPtr list)
 
 void SLDestroyIterator(SortedListIteratorPtr iter)
 {
-	printf("Enter SLDestroyIterator\n");
+	
 	iter->current->refcount -= 1;
 	iter->current = NULL; 
 	free(iter);
-	printf("Leaving SLDestroyIterator\n");
+	
 	return;
 }
 
@@ -339,12 +339,12 @@ void SLDestroyIterator(SortedListIteratorPtr iter)
 
 void *SNextItem(SortedListIteratorPtr iter)
 {
-	printf("Enter SLNextItem\n");
+	
 	if (iter->current->next==NULL)
     	{
 		void *temp = iter->current->data;
 		iter->current = iter->current->next;	
-		printf("Here?\n");	
+		
 	
 		return temp;
    	} 
@@ -354,25 +354,25 @@ void *SNextItem(SortedListIteratorPtr iter)
 
 	if(iter->current->refcount==0)
 	{
-		printf("sup\n");
+		
 		NodePtr tomp = iter->current;
 
 		iter->current = iter->current->next;
 		iter->current->refcount += 1;
 		tomp->next = NULL;
 		NodeDestroy(tomp);
-		printf("Leaving SLNextItem\n");
+		
 		return temp;
 	} 
 
 	else if(iter->current->refcount >= 1)
 	{
-		printf("sup2\n");
+		
 
 		iter->current = iter->current->next; // Move to the next node
 		iter->current->refcount += 1;
 		
-		printf("Leaving SLNextItem\n");
+		
 		return temp;
 	}
     return NULL;

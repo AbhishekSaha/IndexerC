@@ -31,10 +31,29 @@ char *testRemove(char *curPath)
 }
 
 
+int checkIndex(char * file, char *path) // returns 1 if a file with the same name as the index file exists
+{
+	DIR *dirPtr;
+	dirPtr = opendir(path);
+
+	struct dirent *direntPtr = readdir(dirPtr);
+
+	while(direntPtr != NULL)
+	{
+
+		printf("%s\n",direntPtr->d_name);
+		if(strcmp(direntPtr->d_name,file) == 0)
+			return 1;
+	
+		direntPtr = readdir(dirPtr);
+	}
+
+	return 0;
+}
 void recurse(char *path, FILE *bufferPtr)
 {
     
-	printf("The path is: %s\n",path);
+	
 	DIR *dirPtr;
 	dirPtr = opendir(path); 
     
@@ -85,13 +104,13 @@ int checkFile(char *file)
         char temp[25];
         strcpy(temp,file);
 
-        printf("File is: %s\n",temp);
+        
 
         char bob[4];
 
         int length = strlen(temp);
 
-        printf("Length is: %d\n",length);
+        
 
 
         bob[3] = temp[length];
@@ -99,7 +118,7 @@ int checkFile(char *file)
         bob[1] = temp[length - 2];
         bob[0] = temp[length - 3];
 
-        printf("temp is: %s\n",bob);
+        
 
         return strcmp(bob,"txt");
 }
@@ -107,6 +126,23 @@ int checkFile(char *file)
 
 int main(int argc, char **argv)
 {
+	if((argv[2] == NULL) || (argv[1] == NULL))
+	{
+		printf("Not enough arguments. Please enter your input in the form ./index index.txt file/directory. Exiting...\n");
+		return 0;
+	}
+	else if(argv[3] != NULL)
+	{
+		printf("Too many arguments. Please enter your input in the form ./index index.txt file/directory. Exiting...\n");
+		return 0;
+	}
+
+
+	int holder;
+//	holder = checkIndex(argv[1],".");
+
+
+
 	char *indexFile;
 	indexFile = argv[1];
     
@@ -136,10 +172,12 @@ int main(int argc, char **argv)
 		printf("There is an error in your input. Please make sure that the input is the path to an existing file or directory. Exiting...\n");
     fclose(bufferPtr);
 	process("bill", "rondo");
-    printAll(indexFile);
+    
+
+	holder = printAll(indexFile);
 	
 	remove("aux.txt");
-printf("print da bemat\n");
+
 return 0;
 }
 
