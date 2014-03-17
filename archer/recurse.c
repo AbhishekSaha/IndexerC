@@ -40,8 +40,6 @@ int checkIndex(char * file, char *path) // returns 1 if a file with the same nam
 
 	while(direntPtr != NULL)
 	{
-
-		printf("%s\n",direntPtr->d_name);
 		if(strcmp(direntPtr->d_name,file) == 0)
 			return 1;
 	
@@ -139,7 +137,13 @@ int main(int argc, char **argv)
 
 
 	int holder;
-//	holder = checkIndex(argv[1],".");
+	holder = checkIndex(argv[1],".");
+	
+	if(holder == 1)
+	{
+		printf("overwriting file with same name as %s...\n",argv[1]);
+		remove(argv[1]);
+	}
 
 
 
