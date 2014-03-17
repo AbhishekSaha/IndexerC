@@ -70,7 +70,7 @@ void process(char *myToken, char *myFilePath) //Change the parameters to (char *
         //him = (NNodePtr)malloc(sizeof(NNode));
         //  printAll();
         
-    }
+    }6
     
     
   
