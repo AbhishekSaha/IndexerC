@@ -54,6 +54,7 @@ NodePtr NodeCreate(void *newObj, char*name)
 
 void NodeDestroy(NodePtr myNode)
 {
+    
 	free(myNode);
 	
 
@@ -88,7 +89,7 @@ int SLInsert(SortedListPtr list, void *newObj, char*key)
         while (cur->next!=NULL && comp!=0) {
             prev = cur;
             cur = cur->next;
-            comp = (int)strcmp(cur->name, (char*)newObj);
+            comp = (int)strcmp(cur->name, key);
         }
 		
         
@@ -99,6 +100,7 @@ int SLInsert(SortedListPtr list, void *newObj, char*key)
            
            SLRemove(list, key);
            Insert(list, cur->data , key);
+            return 1;
         }
         else{
           
