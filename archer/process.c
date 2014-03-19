@@ -107,7 +107,7 @@ void insert(NNodePtr item){
         //        free(item);
     }
     else{
-        printf("Entered process\n");
+        
         SortedListPtr temp = current_token->list;
         int success = 0;
         int * one = malloc(sizeof(int));
@@ -185,8 +185,8 @@ int printAll(char * path){
             
                     continue;}
                 
-    }
-    
+            }
+            
             
             free(rust);
             free(tokens);
