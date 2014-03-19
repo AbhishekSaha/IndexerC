@@ -147,7 +147,7 @@ int printAll(char * path){
             SortedListPtr buff = current_token->list;
             NodePtr ptr = buff->head;
             NodePtr prev; NodePtr tomp;
-            fprintf(f, "<List> (%s)\n </List>",KEY);
+            fprintf(f, "<List> (%s)\n",KEY);
             
             while(ptr!=NULL){
                 
@@ -162,6 +162,7 @@ int printAll(char * path){
                 
                 
             }
+	    fprintf(f,"\n</List>");
             free(prev->data); free(prev->name); free(prev->next);
             free(prev);
             fprintf(f,"\n\n");

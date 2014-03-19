@@ -160,7 +160,6 @@ int main(int argc, char **argv)
 			}
 			else
 			{
-				printf("nope\n");
 				printf("Invalid choice. Would you like to override the existing file (y/n)? \n");
 				scanf("%c",&decision);
 			}
