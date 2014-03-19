@@ -19,7 +19,7 @@ char *getNewPath(char *dirName,char *newItemName)
 char *testRemove(char *curPath)
 {
 	char *ptr;
-    
+
 	ptr = strrchr(curPath,'/');
 	
 	if(ptr != NULL)
